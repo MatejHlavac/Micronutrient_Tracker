@@ -1,0 +1,52 @@
+[
+	{
+		"id": "vitamin_a",
+		"name": "Vitamín A",
+		"type": "vitamin"
+	},
+	{
+		"id": "vitamin_c",
+		"name": "Vitamín C",
+		"type": "vitamin"
+	},
+	{
+		"id": "vitamin_d",
+		"name": "Vitamín D",
+		"type": "vitamin"
+	},
+	{
+		"id": "vitamin_e",
+		"name": "Vitamín E",
+		"type": "vitamin"
+	},
+	{
+		"id": "vitamin_b12",
+		"name": "Vitamín B12",
+		"type": "vitamin"
+	},
+	{
+		"id": "iron",
+		"name": "Železo",
+		"type": "mineral"
+	},
+	{
+		"id": "calcium",
+		"name": "Vápnik",
+		"type": "mineral"
+	},
+	{
+		"id": "magnesium",
+		"name": "Horčík",
+		"type": "mineral"
+	},
+	{
+		"id": "potassium",
+		"name": "Draslík",
+		"type": "mineral"
+	},
+	{
+		"id": "zinc",
+		"name": "Zinok",
+		"type": "mineral"
+	}
+]
