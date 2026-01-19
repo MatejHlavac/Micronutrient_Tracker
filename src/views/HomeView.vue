@@ -1,9 +1,17 @@
-<script setup>
-import TheWelcome from '../components/TheWelcome.vue'
+<script>
+export default {
+	name: 'HomeView'
+}
 </script>
 
 <template>
-  <main>
-    <TheWelcome />
-  </main>
+	<div class="home">
+		<h1>Domov</h1>
+	</div>
 </template>
+
+<style scoped>
+.home {
+	padding: 2rem;
+}
+</style>
