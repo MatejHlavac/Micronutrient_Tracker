@@ -1,7 +1,7 @@
 [
 	{
 		"id": "carrot",
-		"name": "Mrkva",
+		"name": "Carrot",
 		"category": "vegetable",
 		"micronutrients": {
 			"vitamin_a": 5,
@@ -10,7 +10,7 @@
 	},
 	{
 		"id": "red_pepper",
-		"name": "Červená paprika",
+		"name": "Red Pepper",
 		"category": "vegetable",
 		"micronutrients": {
 			"vitamin_c": 5,
@@ -19,7 +19,7 @@
 	},
 	{
 		"id": "spinach",
-		"name": "Špenát",
+		"name": "Spinach",
 		"category": "vegetable",
 		"micronutrients": {
 			"vitamin_a": 4,
@@ -29,7 +29,7 @@
 	},
 	{
 		"id": "apple",
-		"name": "Jablko",
+		"name": "Apple",
 		"category": "fruit",
 		"micronutrients": {
 			"vitamin_c": 1,
@@ -38,7 +38,7 @@
 	},
 	{
 		"id": "banana",
-		"name": "Banán",
+		"name": "Banana",
 		"category": "fruit",
 		"micronutrients": {
 			"potassium": 3,
@@ -47,7 +47,7 @@
 	},
 	{
 		"id": "orange",
-		"name": "Pomaranč",
+		"name": "Orange",
 		"category": "fruit",
 		"micronutrients": {
 			"vitamin_c": 4
@@ -55,7 +55,7 @@
 	},
 	{
 		"id": "chicken_breast",
-		"name": "Kuracie prsia",
+		"name": "Chicken Breast",
 		"category": "meat",
 		"micronutrients": {
 			"vitamin_b12": 2,
@@ -64,7 +64,7 @@
 	},
 	{
 		"id": "beef",
-		"name": "Hovädzie mäso",
+		"name": "Beef",
 		"category": "meat",
 		"micronutrients": {
 			"iron": 4,
@@ -74,7 +74,7 @@
 	},
 	{
 		"id": "salmon",
-		"name": "Losos",
+		"name": "Salmon",
 		"category": "fish",
 		"micronutrients": {
 			"vitamin_d": 4,
@@ -83,7 +83,7 @@
 	},
 	{
 		"id": "tuna",
-		"name": "Tuniak",
+		"name": "Tuna",
 		"category": "fish",
 		"micronutrients": {
 			"vitamin_b12": 3,
