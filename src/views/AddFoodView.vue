@@ -1,17 +1,18 @@
 <script>
 export default {
-	  name: 'HomeView'
+    name: 'AddFoodView'
 }
 </script>
 
 <template>
-	  <div class="home">
-		  <h1>Domov</h1>
-	  </div>
+    <div class = "add-food">
+        <h1>Add Food</h1>
+    </div>
+
 </template>
 
 <style scoped>
-.home {
+.add-food {
 	padding: 2rem;
 }
 </style>
