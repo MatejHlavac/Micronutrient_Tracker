@@ -15,6 +15,13 @@ export default {
             const store = useNutritionStore()
             store.addFood(this.foodItem.id)
         }
+    },
+
+    computed: {
+        addedCount() {
+            const store = useNutritionStore()
+            return store.dailyFoods.filter(id => id === this.foodItem.id).length
+        }
     }
 }
 </script>
@@ -23,6 +30,7 @@ export default {
     <div class = "food-card">
         <h3>{{ foodItem.name }}</h3>
         <p class = "category">{{ foodItem.category }}</p>
+        <p v-if = "addedCount > 0" class = "added-count">Added: {{ addedCount }}x</p>
         <button @click = "addFood()" class = "add-button">Add</button>
     </div>
 </template>
@@ -62,5 +70,12 @@ export default {
 
 .add-button:hover {
 	background: #35a372;
+}
+
+.added-count {
+	margin: 0.5rem 0;
+	color: #42b983;
+	font-weight: bold;
+	font-size: 0.9rem;
 }
 </style>
