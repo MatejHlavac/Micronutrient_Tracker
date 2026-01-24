@@ -1,8 +1,13 @@
 <script>
 import foodsData from '@/data/foods.json'
+import FoodCard from '@/components/FoodCard.vue'
 
 export default {
     name: 'AddFoodView',
+
+    components: {
+        FoodCard
+    },
 
     data() {
         return {
@@ -17,9 +22,7 @@ export default {
         <h1>Add Food</h1>
 
         <div class = "foods-list">
-            <div v-for="food in foods" :key = "food.id" class = "food-item">
-                {{ food.name }}
-            </div>
+            <FoodCard v-for = "food in foods" :key = "food.id" :foodItem = "food" />
         </div>
     </div>
 
@@ -28,5 +31,12 @@ export default {
 <style scoped>
 .add-food {
 	padding: 2rem;
+}
+
+.foods-list {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+	gap: 1rem;
+	margin-top: 2rem;
 }
 </style>
