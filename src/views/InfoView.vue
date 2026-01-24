@@ -6,13 +6,13 @@ export default {
         
 <template>
     <div class = "info">
-        <h1>Informations</h1>
+        <h1>Micronutrient Information</h1>
     </div>
         
 </template>
         
 <style scoped>
-.add-food {
+.info {
 	padding: 2rem;
 }   
 </style>

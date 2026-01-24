@@ -12,7 +12,7 @@ export default {
 </template>
     
 <style scoped>
-.add-food {
+.stats {
 	padding: 2rem;
 }
 </style>

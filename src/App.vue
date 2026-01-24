@@ -1,8 +1,14 @@
 <script>
 import { useNutritionStore } from './stores/nutritions';
+import Navigation from './components/Navigation.vue'
 
 export default {
 	name: 'App',
+
+	components: {
+		Navigation,
+	},
+
 	mounted() {
 		const store = useNutritionStore()
 		store.initialize()
@@ -15,6 +21,7 @@ export default {
 
 <template>
 	<div id="app">
+		<Navigation />
 		<router-view />
 	</div>
 </template>
