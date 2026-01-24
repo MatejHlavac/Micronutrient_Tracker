@@ -12,15 +12,21 @@ export default {
 
     methods: {
         addFood() {
-            const store = useNutritionStore()
-            store.addFood(this.foodItem.id)
+            this.store.addFood(this.foodItem.id)
+        },
+
+        removeFood() {
+            this.store.removeFood(this.foodItem.id)
         }
     },
 
     computed: {
+        store() {
+            return useNutritionStore()
+        },
+        
         addedCount() {
-            const store = useNutritionStore()
-            return store.dailyFoods.filter(id => id === this.foodItem.id).length
+            return this.store.dailyFoods.filter(id => id === this.foodItem.id).length
         }
     }
 }
@@ -32,6 +38,7 @@ export default {
         <p class = "category">{{ foodItem.category }}</p>
         <p v-if = "addedCount > 0" class = "added-count">Added: {{ addedCount }}x</p>
         <button @click = "addFood()" class = "add-button">Add</button>
+        <button v-if="addedCount > 0" @click = "removeFood()" class = "remove-button">Remove</button>
     </div>
 </template>
 
@@ -77,5 +84,22 @@ export default {
 	color: #42b983;
 	font-weight: bold;
 	font-size: 0.9rem;
+}
+
+.remove-button {
+	margin-top: 0.5rem;
+	margin-left: 0.5rem;
+	padding: 0.5rem 1rem;
+	background: #dc3545;
+	color: white;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+	font-size: 0.9rem;
+	transition: background 0.3s;
+}
+
+.remove-button:hover {
+	background: #c82333;
 }
 </style>
