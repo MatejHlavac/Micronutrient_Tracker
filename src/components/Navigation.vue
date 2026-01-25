@@ -15,29 +15,36 @@ export default {
 </template>
 
 <style scoped>
-    .navigation {
-        background: #f5f5f5;
-        padding: 1rem;
-        border-bottom: 1px solid #ddd;
-        display: flex;
-        gap: 1rem;
-        justify-content: center;
-    }
-    
-    .navigation a {
-        color: #333;
-        text-decoration: none;
-        padding: 0.5rem 1rem;
-        border-radius: 4px;
-        transition: background 0.3s;
-    }
-    
-    .navigation a:hover {
-        background: #e0e0e0;
-    }
-    
-    .navigation a.router-link-active {
-        background: #42b983;
-        color: white;
-    }
-    </style>
+.navigation {
+	background: var(--color-background);
+	padding: 1rem;
+	border-bottom: 1px solid var(--color-border);
+	display: flex;
+	gap: 1rem;
+	justify-content: center;
+}
+
+.navigation a {
+	color: var(--color-text);
+	text-decoration: none;
+	padding: 0.5rem 1rem;
+	border: 1px solid rgba(0, 0, 0, 0.2);
+	background: rgba(255, 255, 255, 0.4);
+	backdrop-filter: blur(20px) saturate(180%);
+	border-radius: 12px;
+	transition: all 0.2s;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.navigation a:hover {
+	background: rgba(255, 255, 255, 0.6);
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.navigation a.router-link-active {
+	background: rgba(0, 0, 0, 0.6);
+	color: var(--color-background);
+	backdrop-filter: blur(20px) saturate(180%);
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+</style>

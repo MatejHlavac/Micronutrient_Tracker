@@ -37,10 +37,8 @@ export default {
 
 <style scoped>
 .nutrient-info-card {
-	border: 1px solid #ddd;
-	border-radius: 8px;
-	background: white;
-	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	border: 1px solid var(--color-border);
+	background: var(--color-background);
 	margin-bottom: 1rem;
 }
 
@@ -50,26 +48,32 @@ export default {
 	align-items: center;
 	padding: 1rem;
 	cursor: pointer;
+	transition: background 0.2s;
+}
+
+.card-header:hover {
+	background: var(--color-background-hover);
 }
 
 .card-header h3 {
 	margin: 0;
 	font-size: 1.2rem;
+	color: var(--color-text);
 }
 
 .arrow {
 	font-size: 1rem;
-	color: #666;
+	color: var(--color-text);
 }
 
 .card-content {
 	padding: 1rem;
-	border-top: 1px solid #e0e0e0;
+	border-top: 1px solid var(--color-border);
 }
 
 .info-text {
 	margin: 0;
-	color: #666;
+	color: var(--color-text-secondary);
 	line-height: 1.6;
 }
 </style>

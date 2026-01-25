@@ -76,22 +76,27 @@ export default {
 
 .filter-button {
 	padding: 0.5rem 1rem;
-	background: #f5f5f5;
-	border: 1px solid #ddd;
-	border-radius: 4px;
+	background: rgba(255, 255, 255, 0.4);
+	backdrop-filter: blur(20px) saturate(180%);
+	border: 1px solid rgba(0, 0, 0, 0.2);
+	border-radius: 12px;
 	cursor: pointer;
 	font-size: 0.9rem;
-	transition: all 0.3s;
+	transition: all 0.2s;
 	text-transform: capitalize;
+	color: var(--color-text);
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .filter-button:hover {
-	background: #e0e0e0;
+	background: rgba(255, 255, 255, 0.6);
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 .filter-button.active {
-	background: #42b983;
-	color: white;
-	border-color: #42b983;
+	background: rgba(0, 0, 0, 0.6);
+	color: var(--color-background);
+	backdrop-filter: blur(20px) saturate(180%);
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 </style>

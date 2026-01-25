@@ -78,26 +78,23 @@ export default {
 
 <style scoped>
 .nutrient-card {
-	border: 1px solid #ddd;
-	border-radius: 8px;
+	border: 1px solid var(--color-border);
 	padding: 1rem;
-	background: white;
-	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	background: var(--color-background);
 }
 
 .nutrient-card h3 {
 	margin: 0;
 	font-size: 1.2rem;
-    color: #000;
+	color: var(--color-text);
 	text-align: center;
 }
 
 .progress-container {
 	width: 100%;
 	height: 30px;
-	background: #e0e0e0;
-	border: 1px solid #000;
-	border-radius: 15px;
+	background: var(--color-background);
+	border: 1px solid var(--color-border);
 	overflow: hidden;
 	position: relative;
 	margin-top: 1rem;
@@ -105,8 +102,7 @@ export default {
 
 .progress-bar {
 	height: 100%;
-	background: #42b983;
-	border-radius: 15px;
+	border-radius: 0;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -114,14 +110,13 @@ export default {
 }
 
 .progress-text {
-	color: white;
+	color: var(--color-background);
 	font-weight: bold;
 	font-size: 0.85rem;
-	text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 
 .progress-text-container {
-	color: #666;
+	color: var(--color-text);
 	font-weight: bold;
 	font-size: 0.85rem;
 	position: absolute;
