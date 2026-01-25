@@ -1,52 +1,62 @@
 [
 	{
 		"id": "vitamin_a",
-		"name": "Vitamín A",
-		"type": "vitamin"
+		"name": "Vitamin A",
+		"type": "vitamin",
+		"maxValue": 18
 	},
 	{
 		"id": "vitamin_c",
-		"name": "Vitamín C",
-		"type": "vitamin"
+		"name": "Vitamin C",
+		"type": "vitamin",
+		"maxValue": 24
 	},
 	{
 		"id": "vitamin_d",
-		"name": "Vitamín D",
-		"type": "vitamin"
+		"name": "Vitamin D",
+		"type": "vitamin",
+		"maxValue": 10
 	},
 	{
 		"id": "vitamin_e",
-		"name": "Vitamín E",
-		"type": "vitamin"
+		"name": "Vitamin E",
+		"type": "vitamin",
+		"maxValue": 14
 	},
 	{
 		"id": "vitamin_b12",
-		"name": "Vitamín B12",
-		"type": "vitamin"
+		"name": "Vitamin B12",
+		"type": "vitamin",
+		"maxValue": 12
 	},
 	{
 		"id": "iron",
-		"name": "Železo",
-		"type": "mineral"
+		"name": "Iron",
+		"type": "mineral",
+		"maxValue": 16
 	},
 	{
 		"id": "calcium",
-		"name": "Vápnik",
-		"type": "mineral"
+		"name": "Calcium",
+		"type": "mineral",
+		"maxValue": 10
 	},
 	{
 		"id": "magnesium",
-		"name": "Horčík",
-		"type": "mineral"
+		"name": "Magnesium",
+		"type": "mineral",
+		"maxValue": 14
 	},
 	{
 		"id": "potassium",
-		"name": "Draslík",
-		"type": "mineral"
+		"name": "Potassium",
+		"type": "mineral",
+		"maxValue": 22
 	},
 	{
 		"id": "zinc",
-		"name": "Zinok",
-		"type": "mineral"
+		"name": "Zinc",
+		"type": "mineral",
+		"maxValue": 14
 	}
 ]
