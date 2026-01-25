@@ -6,45 +6,52 @@ export default {
 
 <template>
     <nav class = "navigation">
-        <RouterLink to = "/">Home</RouterLink>
-        <RouterLink to = "/add">Foods</RouterLink>
-        <RouterLink to = "/stats">Statistics</RouterLink>
-        <RouterLink to = "/info">Info</RouterLink>
-        <RouterLink to = "/about">About</RouterLink>
+        <div class = "nav-container">
+            <RouterLink to = "/">HOME</RouterLink>
+            <RouterLink to = "/add">FOODS</RouterLink>
+            <RouterLink to = "/stats">STATISTICS</RouterLink>
+            <RouterLink to = "/info">INFO</RouterLink>
+            <RouterLink to = "/about">ABOUT</RouterLink>
+        </div>
     </nav>
 </template>
 
 <style scoped>
 .navigation {
-	background: var(--color-background);
-	padding: 1rem;
-	border-bottom: 1px solid var(--color-border);
 	display: flex;
-	gap: 1rem;
 	justify-content: center;
+	padding: 1rem;
+}
+
+.nav-container {
+	background: #d3d363;
+	border-radius: 10px;
+	padding: 0.5rem;
+	display: flex;
+	gap: 0.5rem;
+	justify-content: space-evenly;
+	align-items: center;
 }
 
 .navigation a {
 	color: var(--color-text);
 	text-decoration: none;
-	padding: 0.5rem 1rem;
-	border: 1px solid rgba(0, 0, 0, 0.2);
-	background: rgba(255, 255, 255, 0.4);
-	backdrop-filter: blur(20px) saturate(180%);
-	border-radius: 12px;
-	transition: all 0.2s;
-	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+	padding: 0.75rem 1.5rem;
+	border-radius: 10px;
+	transition: background 0.2s;
+	flex: 1;
+	text-align: center;
+	font-family: "JetBrains Mono", monospace;
+	font-optical-sizing: auto;
+	font-weight: 500;
+	font-style: normal;
 }
 
 .navigation a:hover {
-	background: rgba(255, 255, 255, 0.6);
-	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+	background: #dedea3;
 }
 
 .navigation a.router-link-active {
-	background: rgba(0, 0, 0, 0.6);
-	color: var(--color-background);
-	backdrop-filter: blur(20px) saturate(180%);
-	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+	background: #e4e49f;
 }
 </style>
