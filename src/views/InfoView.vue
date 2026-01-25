@@ -1,12 +1,45 @@
 <script>
+import micronutrientsData from '@/data/micronutrients.json'
+import NutrientInfoCard from '@/components/NutrientInfoCard.vue'
+
 export default {
-    name: 'InfoView'
+    name: 'InfoView',
+
+    components: {
+        NutrientInfoCard
+    },
+
+	data() {
+		return {
+			micronutrients: micronutrientsData,
+			openedCards: {}
+		}
+	},
+
+    methods: {
+        toggleCard(nutrientId) {
+            this.openedCards[nutrientId] = !this.openedCards[nutrientId]
+        },
+        isOpen(nutrientId) {
+			return this.openedCards[nutrientId] || false
+		}
+    }
 }
 </script>
         
 <template>
     <div class = "info">
         <h1>Micronutrient Information</h1>
+
+        <div class = "nutrients-list">
+            <NutrientInfoCard
+                v-for = "nutrient in micronutrients"
+                :key = "nutrient.id"
+                :nutrient = "nutrient"
+                :isOpen = "isOpen(nutrient.id)"
+                @toggle = "toggleCard(nutrient.id)"
+            />
+        </div>
     </div>
         
 </template>
@@ -14,5 +47,12 @@ export default {
 <style scoped>
 .info {
 	padding: 2rem;
-}   
+}
+
+.nutrients-list {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+	margin-top: 2rem;
+}
 </style>

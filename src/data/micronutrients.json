@@ -3,60 +3,70 @@
 		"id": "vitamin_a",
 		"name": "Vitamin A",
 		"type": "vitamin",
-		"maxValue": 18
+		"maxValue": 18,
+		"description": "Vitamin A is a fat-soluble vitamin essential for vision, immune system function, and healthy skin. It plays an important role in maintaining normal eyesight, especially in low-light conditions, and supports the body's natural defense mechanisms. It is commonly found in vegetables with strong orange or dark green color, such as carrots, spinach, red bell peppers, and leafy green vegetables. Optimal weekly intake: approximately 5,600 µg RAE."
 	},
 	{
 		"id": "vitamin_c",
 		"name": "Vitamin C",
 		"type": "vitamin",
-		"maxValue": 24
+		"maxValue": 24,
+		"description": "Vitamin C is a water-soluble vitamin that supports the immune system, collagen production, and helps protect cells from oxidative stress. It is important for skin health, wound healing, and overall vitality. Vitamin C is commonly found in fresh fruits and vegetables, such as oranges, red bell peppers, strawberries, and broccoli. Optimal weekly intake: approximately 560 mg."
 	},
 	{
 		"id": "vitamin_d",
 		"name": "Vitamin D",
 		"type": "vitamin",
-		"maxValue": 10
+		"maxValue": 10,
+		"description": "Vitamin D is a fat-soluble vitamin that helps the body absorb calcium and maintain strong bones and teeth. It also supports muscle function and immune health. Unlike most vitamins, vitamin D can be produced by the body through sunlight exposure, but it is also found in certain foods, such as salmon, tuna, and other fatty fish. Optimal weekly intake: approximately 105 µg."
 	},
 	{
 		"id": "vitamin_e",
 		"name": "Vitamin E",
 		"type": "vitamin",
-		"maxValue": 14
+		"maxValue": 14,
+		"description": "Vitamin E is a fat-soluble antioxidant that helps protect cells from oxidative damage and supports immune function. It also contributes to healthy skin and blood vessels. Vitamin E is mainly obtained from plant-based foods, such as spinach, leafy green vegetables, and foods containing natural plant oils. Optimal weekly intake: approximately 105 mg."
 	},
 	{
 		"id": "vitamin_b12",
 		"name": "Vitamin B12",
 		"type": "vitamin",
-		"maxValue": 12
+		"maxValue": 12,
+		"description": "Vitamin B12 is essential for red blood cell formation, nervous system function, and DNA synthesis. A low intake may lead to fatigue and neurological problems. It is naturally present almost exclusively in animal-based foods, such as beef, chicken, fish, and other meat products. Optimal weekly intake: approximately 17 µg."
 	},
 	{
 		"id": "iron",
 		"name": "Iron",
 		"type": "mineral",
-		"maxValue": 16
+		"maxValue": 16,
+		"description": "Iron is a mineral that plays a key role in oxygen transport in the blood and energy metabolism. It is important for physical performance and normal cognitive function. Iron can be found in both animal and plant foods, such as beef, meat products, spinach, and leafy green vegetables. Optimal weekly intake: approximately 98 mg."
 	},
 	{
 		"id": "calcium",
 		"name": "Calcium",
 		"type": "mineral",
-		"maxValue": 10
+		"maxValue": 10,
+		"description": "Calcium is a mineral essential for strong bones and teeth, as well as muscle contraction and nerve signaling. It plays a crucial role throughout all stages of life. While dairy products are the most concentrated source, calcium can also be obtained from foods such as leafy green vegetables, broccoli, and other plant-based sources. Optimal weekly intake: approximately 7,000 mg."
 	},
 	{
 		"id": "magnesium",
 		"name": "Magnesium",
 		"type": "mineral",
-		"maxValue": 14
+		"maxValue": 14,
+		"description": "Magnesium is involved in hundreds of biochemical reactions in the body, including muscle function, nerve signaling, and energy production. It is widely distributed in plant-based foods, such as bananas, spinach, leafy vegetables, and other plant foods. Optimal weekly intake: approximately 2,800 mg."
 	},
 	{
 		"id": "potassium",
 		"name": "Potassium",
 		"type": "mineral",
-		"maxValue": 22
+		"maxValue": 22,
+		"description": "Potassium is a mineral that helps regulate fluid balance, muscle contractions, and nerve impulses. It is important for heart function and maintaining normal blood pressure. Potassium is commonly found in many fruits and vegetables, such as bananas, potatoes, tomatoes, and vegetables. Optimal weekly intake: approximately 24,500 mg."
 	},
 	{
 		"id": "zinc",
 		"name": "Zinc",
 		"type": "mineral",
-		"maxValue": 14
+		"maxValue": 14,
+		"description": "Zinc supports the immune system, wound healing, and normal metabolic processes. It is important for growth, tissue repair, and enzyme function. Zinc is found mainly in animal-based foods, such as beef, chicken, fish, and meat products, with smaller amounts in plant foods. Optimal weekly intake: approximately 70 mg."
 	}
 ]
