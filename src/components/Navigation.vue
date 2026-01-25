@@ -41,10 +41,7 @@ export default {
 	transition: background 0.2s;
 	flex: 1;
 	text-align: center;
-	font-family: "JetBrains Mono", monospace;
-	font-optical-sizing: auto;
 	font-weight: 500;
-	font-style: normal;
 }
 
 .navigation a:hover {

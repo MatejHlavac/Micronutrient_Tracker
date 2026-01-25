@@ -30,7 +30,7 @@ export default {
 			}
 		},
 		showTextInContainer() {
-			return this.nutrient.percentage < 20
+			return this.nutrient.percentage < 25
 		}
 	},
 
