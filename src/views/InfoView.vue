@@ -29,7 +29,7 @@ export default {
         
 <template>
     <div class = "info">
-        <h1>Micronutrient Information</h1>
+        <h2 class="info-title">Micronutrient Information</h2>
 
         <div class = "nutrients-list">
             <NutrientInfoCard
@@ -47,6 +47,12 @@ export default {
 <style scoped>
 .info {
 	padding: 2rem;
+	padding-top: 0.5rem;
+}
+
+.info-title {
+	text-align: center;
+	margin-bottom: 2rem;
 }
 
 .nutrients-list {
@@ -54,5 +60,6 @@ export default {
 	flex-direction: column;
 	gap: 1rem;
 	margin-top: 2rem;
+	align-items: center;
 }
 </style>

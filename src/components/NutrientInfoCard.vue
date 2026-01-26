@@ -24,9 +24,9 @@ export default {
 
 <template>
     <div class = "nutrient-info-card">
-        <div class = "card-header">
+        <div class = "card-header" @click = "toggle">
             <h3>{{ nutrient.name }}</h3>
-            <span class = "arrow" @click = "toggle">{{ isOpen ? '▲' : '▼' }}</span>
+            <span class = "arrow">{{ isOpen ? '▲' : '▼' }}</span>
         </div>
 
         <div v-if="isOpen" class="card-content">
@@ -38,8 +38,10 @@ export default {
 <style scoped>
 .nutrient-info-card {
 	border: 1px solid var(--color-border);
-	background: var(--color-background);
-	margin-bottom: 1rem;
+	background: #e4e49f;
+	display: flex;
+	flex-direction: column;
+	width: 50%;
 }
 
 .card-header {
@@ -52,7 +54,7 @@ export default {
 }
 
 .card-header:hover {
-	background: var(--color-background-hover);
+	background: #d3d363;
 }
 
 .card-header h3 {
