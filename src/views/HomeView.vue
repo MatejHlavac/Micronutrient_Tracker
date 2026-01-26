@@ -131,7 +131,6 @@ export default {
 }
 
 .add-food-button {
-	display: inline-block;
 	padding: 0.75rem 1.5rem;
 	background: #d3d363;
 	border-radius: 10px;
