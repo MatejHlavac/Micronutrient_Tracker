@@ -103,4 +103,33 @@ export default {
 	color: var(--color-text);
 	font-weight: 600;
 }
+
+@media (max-width: 768px) {
+	.about {
+		padding: 1rem;
+		padding-top: 0.5rem;
+	}
+
+	.header h1 {
+		font-size: 1.5rem;
+	}
+
+	.subtitle {
+		font-size: 1rem;
+	}
+
+	.section {
+		margin-bottom: 3rem;
+	}
+
+	.section h2 {
+		font-size: 1.2rem;
+	}
+
+	.section p,
+	.features-list li,
+	.instructions-list li {
+		font-size: 0.9rem;
+	}
+}
 </style>

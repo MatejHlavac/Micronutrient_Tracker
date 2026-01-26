@@ -62,4 +62,19 @@ export default {
 	margin-top: 2rem;
 	align-items: center;
 }
+
+@media (max-width: 768px) {
+	.info {
+		padding: 1rem;
+		padding-top: 0.5rem;
+	}
+
+	.nutrients-list {
+		width: 100%;
+	}
+
+	.nutrients-list .nutrient-info-card {
+		width: 100%;
+	}
+}
 </style>

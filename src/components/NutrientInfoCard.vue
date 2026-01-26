@@ -78,4 +78,14 @@ export default {
 	color: var(--color-text-secondary);
 	line-height: 1.6;
 }
+
+@media (max-width: 768px) {
+	.nutrient-info-card {
+		width: 100%;
+	}
+
+	.card-header h3 {
+		font-size: 1rem;
+	}
+}
 </style>

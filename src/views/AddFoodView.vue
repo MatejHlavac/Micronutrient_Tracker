@@ -116,4 +116,23 @@ export default {
 .filter-button.active {
 	background: #e4e49f;
 }
+
+@media (max-width: 768px) {
+	.add-food {
+		padding: 1rem;
+	}
+
+	.foods-list .food-card {
+		max-width: 100%;
+	}
+
+	.filter-button {
+		font-size: 0.7rem;
+		padding: 0.4rem 0.8rem;
+	}
+
+	.filter-button:first-child {
+		margin-right: 0.5rem;
+	}
+}
 </style>

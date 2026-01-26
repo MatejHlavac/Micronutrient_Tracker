@@ -51,4 +51,21 @@ export default {
 .navigation a.router-link-active {
 	background: #e4e49f;
 }
+
+@media (max-width: 768px) {
+	.navigation {
+		padding: 0.5rem;
+	}
+
+	.nav-container {
+		flex-wrap: wrap;
+		gap: 0.25rem;
+		padding: 0.25rem;
+	}
+
+	.navigation a {
+		padding: 0.5rem 0.75rem;
+		font-size: 0.75rem;
+	}
+}
 </style>

@@ -169,4 +169,42 @@ export default {
 	margin-right: auto;
 	justify-content: center;
 }
+
+@media (max-width: 1024px) {
+	.foods-grid {
+		grid-template-columns: repeat(2, 280px);
+	}
+}
+
+@media (max-width: 768px) {
+	.home {
+		padding: 1rem;
+		padding-top: 0.5rem;
+	}
+
+	.date-header {
+		flex-direction: column;
+		gap: 0.5rem;
+	}
+
+	.weekday,
+	.date {
+		font-size: 1.2rem;
+		margin-left: 0;
+	}
+
+	.empty-text,
+	.empty-subtext {
+		font-size: 1.2rem;
+	}
+
+	.foods-grid {
+		grid-template-columns: 1fr;
+		max-width: 100%;
+	}
+
+	.foods-grid .daily-food-card {
+		max-width: 100%;
+	}
+}
 </style>

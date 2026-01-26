@@ -142,4 +142,36 @@ export default {
 .filter-button.active {
 	background: #e4e49f;
 }
+
+@media (max-width: 1200px) {
+	.nutrients-grid {
+		grid-template-columns: repeat(3, 250px);
+	}
+}
+
+@media (max-width: 900px) {
+	.nutrients-grid {
+		grid-template-columns: repeat(2, 250px);
+	}
+}
+
+@media (max-width: 768px) {
+	.stats {
+		padding: 1rem;
+		padding-top: 0.5rem;
+	}
+
+	.nutrients-grid {
+		grid-template-columns: 1fr;
+	}
+
+	.filter-button {
+		font-size: 0.7rem;
+		padding: 0.4rem 0.8rem;
+	}
+
+	.filter-button:first-child {
+		margin-right: 0.5rem;
+	}
+}
 </style>
