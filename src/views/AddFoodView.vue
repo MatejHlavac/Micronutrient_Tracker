@@ -36,8 +36,6 @@ export default {
 
 <template>
     <div class = "add-food">
-        <h1>Add Food</h1>
-
         <div class = "filters">
             <button v-for="category in ['all', 'vegetable', 'fruit', 'meat', 'fish']"
                 :key = "category"
@@ -61,14 +59,22 @@ export default {
 }
 
 .foods-list {
-	display: grid;
-	grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 	gap: 1rem;
 	margin-top: 2rem;
 }
 
+.foods-list .food-card {
+	max-width: 55%;
+	width: 100%;
+}
+
 .filters {
 	display: flex;
+	justify-content: center;
+	align-items: center;
 	gap: 0.5rem;
 	margin-bottom: 2rem;
 	flex-wrap: wrap;
@@ -76,27 +82,38 @@ export default {
 
 .filter-button {
 	padding: 0.5rem 1rem;
-	background: rgba(255, 255, 255, 0.4);
-	backdrop-filter: blur(20px) saturate(180%);
-	border: 1px solid rgba(0, 0, 0, 0.2);
-	border-radius: 12px;
-	cursor: pointer;
-	font-size: 0.9rem;
+	background: #d3d363;
+	border-radius: 2px;
 	transition: all 0.2s;
 	text-transform: capitalize;
 	color: var(--color-text);
-	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+	cursor: pointer;
+	font-family: "JetBrains Mono", monospace;
+	font-size: 0.8rem;
+	font-weight: 500;
+	box-shadow: 2px 2px 0 #b8b84d, 3px 3px 6px rgba(0, 0, 0, 0.15);
+	transform: translate(0, 0);
+	border-right: 2px solid #b8b84d;
+	border-bottom: 2px solid #b8b84d;
+	border-top: none;
+	border-left: none;
+}
+
+.filter-button:first-child {
+	margin-right: 1rem;
 }
 
 .filter-button:hover {
-	background: rgba(255, 255, 255, 0.6);
-	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+	box-shadow: 1px 1px 0 #b8b84d, 2px 2px 4px rgba(0, 0, 0, 0.1);
+	transform: translate(1px, 1px);
+}
+
+.filter-button:active {
+	box-shadow: 0.5px 0.5px 0 #b8b84d, 1px 1px 2px rgba(0, 0, 0, 0.08);
+	transform: translate(1.5px, 1.5px);
 }
 
 .filter-button.active {
-	background: rgba(0, 0, 0, 0.6);
-	color: var(--color-background);
-	backdrop-filter: blur(20px) saturate(180%);
-	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+	background: #e4e49f;
 }
 </style>
