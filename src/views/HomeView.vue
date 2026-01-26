@@ -133,7 +133,7 @@ export default {
 .add-food-button {
 	padding: 0.75rem 1.5rem;
 	background: #d3d363;
-	border-radius: 10px;
+	border-radius: 4px;
 	transition: all 0.2s;
 	color: var(--color-text);
 	text-decoration: none;

@@ -89,5 +89,157 @@
 			"vitamin_b12": 3,
 			"vitamin_d": 2
 		}
+	},
+	{
+		"id": "broccoli",
+		"name": "Broccoli",
+		"category": "vegetable",
+		"micronutrients": {
+			"vitamin_c": 4,
+			"vitamin_a": 2,
+			"calcium": 2
+		}
+	},
+	{
+		"id": "tomato",
+		"name": "Tomato",
+		"category": "vegetable",
+		"micronutrients": {
+			"vitamin_c": 2,
+			"potassium": 2
+		}
+	},
+	{
+		"id": "potato",
+		"name": "Potato",
+		"category": "vegetable",
+		"micronutrients": {
+			"potassium": 4,
+			"vitamin_c": 2
+		}
+	},
+	{
+		"id": "onion",
+		"name": "Onion",
+		"category": "vegetable",
+		"micronutrients": {
+			"vitamin_c": 1
+		}
+	},
+	{
+		"id": "garlic",
+		"name": "Garlic",
+		"category": "vegetable",
+		"micronutrients": {
+			"vitamin_c": 1,
+			"iron": 1
+		}
+	},
+	{
+		"id": "zucchini",
+		"name": "Zucchini",
+		"category": "vegetable",
+		"micronutrients": {
+			"vitamin_c": 1,
+			"potassium": 1
+		}
+	},
+	{
+		"id": "cucumber",
+		"name": "Cucumber",
+		"category": "vegetable",
+		"micronutrients": {
+			"potassium": 1
+		}
+	},
+	{
+		"id": "pear",
+		"name": "Pear",
+		"category": "fruit",
+		"micronutrients": {
+			"vitamin_c": 1,
+			"potassium": 1
+		}
+	},
+	{
+		"id": "grapes",
+		"name": "Grapes",
+		"category": "fruit",
+		"micronutrients": {
+			"vitamin_c": 1
+		}
+	},
+	{
+		"id": "blueberries",
+		"name": "Blueberries",
+		"category": "fruit",
+		"micronutrients": {
+			"vitamin_c": 2,
+			"vitamin_e": 1
+		}
+	},
+	{
+		"id": "strawberries",
+		"name": "Strawberries",
+		"category": "fruit",
+		"micronutrients": {
+			"vitamin_c": 4
+		}
+	},
+	{
+		"id": "kiwi",
+		"name": "Kiwi",
+		"category": "fruit",
+		"micronutrients": {
+			"vitamin_c": 5,
+			"potassium": 2
+		}
+	},
+	{
+		"id": "pork",
+		"name": "Pork",
+		"category": "meat",
+		"micronutrients": {
+			"vitamin_b12": 3,
+			"zinc": 3
+		}
+	},
+	{
+		"id": "turkey",
+		"name": "Turkey",
+		"category": "meat",
+		"micronutrients": {
+			"vitamin_b12": 2,
+			"zinc": 2
+		}
+	},
+	{
+		"id": "cod",
+		"name": "Cod",
+		"category": "fish",
+		"micronutrients": {
+			"vitamin_b12": 3,
+			"vitamin_d": 2
+		}
+	},
+	{
+		"id": "mackerel",
+		"name": "Mackerel",
+		"category": "fish",
+		"micronutrients": {
+			"vitamin_d": 4,
+			"vitamin_b12": 3
+		}
+	},
+	{
+		"id": "sardines",
+		"name": "Sardines",
+		"category": "fish",
+		"micronutrients": {
+			"vitamin_d": 3,
+			"vitamin_b12": 4,
+			"calcium": 3
+		}
 	}
+
 ]
