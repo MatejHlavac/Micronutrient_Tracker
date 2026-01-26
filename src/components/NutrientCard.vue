@@ -110,7 +110,7 @@ export default {
 }
 
 .progress-text {
-	color: var(--color-background);
+	color: var(--color-text);
 	font-weight: bold;
 	font-size: 0.85rem;
 }
