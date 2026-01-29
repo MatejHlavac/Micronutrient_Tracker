@@ -231,7 +231,7 @@ export default {
 }
 
 .filter-dropdown:has(.category-trigger) {
-	width: 11rem;
+	width: 12.5rem;
 }
 
 .filter-dropdown:has(.micronutrient-trigger) {
@@ -261,10 +261,13 @@ export default {
 	border-bottom: 2px solid #b8b84d;
 	width: 100%;
 	box-sizing: border-box;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
 .category-trigger {
-	min-width: 11rem;
+	min-width: 12.5rem;
 }
 
 .micronutrient-trigger {
