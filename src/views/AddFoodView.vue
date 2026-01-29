@@ -17,7 +17,9 @@ export default {
             selectedCategory: 'all',
 			selectedMicro: 'all',
 			searched: '',
-			isSorted: null
+			isSorted: null,
+			categoryDropdownOpen: false,
+			micronutrientDropdownOpen: false
         }
     },
 
@@ -56,10 +58,12 @@ export default {
     methods: {
         setCategory(category) {
             this.selectedCategory = category
+            this.$nextTick(() => this.$refs.categoryDropdown?.blur())
         },
 
 		setMicro(micronutrient) {
 			this.selectedMicro = micronutrient
+			this.$nextTick(() => this.$refs.micronutrientDropdown?.blur())
 		},
 
 		search(items) {
@@ -84,6 +88,20 @@ export default {
 
 		toggleSort() {
 			this.isSorted = !this.isSorted
+		},
+
+		maybeCloseCategoryDropdown(e) {
+			if (this.categoryDropdownOpen) {
+				document.activeElement?.blur()
+				e.preventDefault()
+			}
+		},
+
+		maybeCloseMicronutrientDropdown(e) {
+			if (this.micronutrientDropdownOpen) {
+				document.activeElement?.blur()
+				e.preventDefault()
+			}
 		}
     }
 }
@@ -92,23 +110,33 @@ export default {
 <template>
     <div class = "add-food">
         <div class = "filters">
-			<div class = "category-filters">
-				<button v-for="category in ['all', 'vegetable', 'fruit', 'meat', 'fish']"
-					:key = "category"
-					@click = "setCategory(category)"
-					:class = "['category-filter-button', {active: selectedCategory === category}]"
-				>
-				{{ category === 'all' ? 'All' : category.charAt(0).toUpperCase() + category.slice(1) }}
+			<div ref="categoryDropdown" class="filter-dropdown" tabindex="0" @focusin="categoryDropdownOpen = true" @focusout="categoryDropdownOpen = false">
+				<button type="button" class="filter-dropdown-trigger category-trigger" @mousedown="maybeCloseCategoryDropdown($event)">
+					Category: {{ selectedCategory === 'all' ? 'All' : selectedCategory.charAt(0).toUpperCase() + selectedCategory.slice(1) }} ▼
 				</button>
+				<div class="filter-dropdown-content category-dropdown-content">
+					<button v-for="category in ['all', 'vegetable', 'fruit', 'meat', 'fish']"
+						:key = "category"
+						@click = "setCategory(category)"
+						:class = "['category-filter-button', {active: selectedCategory === category}]"
+					>
+					{{ category === 'all' ? 'All' : category.charAt(0).toUpperCase() + category.slice(1) }}
+					</button>
+				</div>
 			</div>
-			<div class = "micronutrient-filters">
-				<button v-for="micronutrient in micronutrientIds"
-					:key = "micronutrient"
-					@click = "setMicro(micronutrient)"
-					:class = "['micronutrient-filter-button', {active: selectedMicro === micronutrient}]"
-				>
-				{{ micronutrient === 'all' ? 'All' : (micronuts.find(m => m.id === micronutrient)?.name ?? micronutrient) }}
+			<div ref="micronutrientDropdown" class="filter-dropdown" tabindex="0" @focusin="micronutrientDropdownOpen = true" @focusout="micronutrientDropdownOpen = false">
+				<button type="button" class="filter-dropdown-trigger micronutrient-trigger" @mousedown="maybeCloseMicronutrientDropdown($event)">
+					Micronutrient: {{ selectedMicro === 'all' ? 'All' : (micronuts.find(m => m.id === selectedMicro)?.name ?? selectedMicro) }} ▼
 				</button>
+				<div class="filter-dropdown-content micronutrient-dropdown-content">
+					<button v-for="micronutrient in micronutrientIds"
+						:key = "micronutrient"
+						@click = "setMicro(micronutrient)"
+						:class = "['micronutrient-filter-button', {active: selectedMicro === micronutrient}]"
+					>
+					{{ micronutrient === 'all' ? 'All' : (micronuts.find(m => m.id === micronutrient)?.name ?? micronutrient) }}
+					</button>
+				</div>
 			</div>
 			<button @click="toggleSort" :class="['sort-button', {active: isSorted}]">A-Z</button>
         </div>
@@ -189,19 +217,84 @@ export default {
 
 .filters {
 	display: flex;
-	flex-direction: column;
+	flex-wrap: wrap;
+	justify-content: center;
 	align-items: center;
 	gap: 1rem;
 	margin-bottom: 2rem;
 }
 
-.category-filters,
-.micronutrient-filters {
+.filter-dropdown {
+	position: relative;
+	display: inline-block;
+	outline: none;
+}
+
+.filter-dropdown:has(.category-trigger) {
+	width: 11rem;
+}
+
+.filter-dropdown:has(.micronutrient-trigger) {
+	width: 16rem;
+}
+
+.filter-dropdown:focus-within .filter-dropdown-content {
 	display: flex;
-	justify-content: center;
-	align-items: center;
-	gap: 0.5rem;
-	flex-wrap: wrap;
+}
+
+.filter-dropdown-trigger {
+	padding: 0.5rem 1rem;
+	background: #d3d363;
+	border-radius: 2px;
+	transition: all 0.2s;
+	text-transform: capitalize;
+	color: var(--color-text);
+	cursor: pointer;
+	font-family: "JetBrains Mono", monospace;
+	font-size: 0.8rem;
+	font-weight: 500;
+	box-shadow: 2px 2px 0 #b8b84d, 3px 3px 6px rgba(0, 0, 0, 0.15);
+	transform: translate(0, 0);
+	border-top: none;
+	border-left: 2px solid #b8b84d;
+	border-right: 2px solid #b8b84d;
+	border-bottom: 2px solid #b8b84d;
+	width: 100%;
+	box-sizing: border-box;
+}
+
+.category-trigger {
+	min-width: 11rem;
+}
+
+.micronutrient-trigger {
+	min-width: 16rem;
+}
+
+.filter-dropdown-content {
+	display: none;
+	position: absolute;
+	top: 100%;
+	left: 0;
+	margin-top: 2px;
+	min-width: 100%;
+	flex-direction: column;
+	gap: 0.35rem;
+	padding: 0.35rem;
+	background: var(--color-background);
+	border-top: none;
+	border-left: 2px solid #b8b84d;
+	border-right: 2px solid #b8b84d;
+	border-bottom: 2px solid #b8b84d;
+	border-radius: 2px;
+	box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.15);
+	z-index: 10;
+	max-height: 280px;
+	overflow-y: auto;
+}
+
+.micronutrient-dropdown-content {
+	max-height: 240px;
 }
 
 .category-filter-button,
@@ -222,11 +315,7 @@ export default {
 	border-bottom: 2px solid #b8b84d;
 	border-top: none;
 	border-left: none;
-}
-
-.category-filter-button:first-child,
-.micronutrient-filter-button:first-child {
-	margin-right: 1rem;
+	text-align: left;
 }
 
 .category-filter-button:hover,
@@ -246,6 +335,33 @@ export default {
 	background: #e4e49f;
 }
 
+.sort-button {
+	padding: 0.5rem 1rem;
+	background: #d3d363;
+	border-radius: 2px;
+	transition: all 0.2s;
+	text-transform: capitalize;
+	color: var(--color-text);
+	cursor: pointer;
+	font-family: "JetBrains Mono", monospace;
+	font-size: 0.8rem;
+	font-weight: 500;
+	box-shadow: 2px 2px 0 #b8b84d, 3px 3px 6px rgba(0, 0, 0, 0.15);
+	border-right: 2px solid #b8b84d;
+	border-bottom: 2px solid #b8b84d;
+	border-top: none;
+	border-left: none;
+}
+
+.sort-button:hover {
+	box-shadow: 1px 1px 0 #b8b84d, 2px 2px 4px rgba(0, 0, 0, 0.1);
+	transform: translate(1px, 1px);
+}
+
+.sort-button.active {
+	background: #e4e49f;
+}
+
 @media (max-width: 768px) {
 	.add-food {
 		padding: 1rem;
@@ -261,15 +377,16 @@ export default {
 		max-width: 100%;
 	}
 
-	.category-filter-button,
-	.micronutrient-filter-button {
+	.filter-dropdown-trigger,
+	.sort-button {
 		font-size: 0.7rem;
 		padding: 0.4rem 0.8rem;
 	}
 
-	.category-filter-button:first-child,
-	.micronutrient-filter-button:first-child {
-		margin-right: 0.5rem;
+	.category-filter-button,
+	.micronutrient-filter-button {
+		font-size: 0.7rem;
+		padding: 0.4rem 0.8rem;
 	}
 }
 </style>
