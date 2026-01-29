@@ -15,7 +15,8 @@ export default {
             foods: foodsData,
 			micronuts: Micronutrients,
             selectedCategory: 'all',
-			selectedMicro: 'all'
+			selectedMicro: 'all',
+			searched: ''
         }
     },
 
@@ -42,7 +43,9 @@ export default {
 
 		micronutrientIds() {
 			return ['all', ...this.micronuts.map(item => item.id)]
-		}
+		},
+
+		
     },
 
     methods: {
@@ -52,6 +55,18 @@ export default {
 
 		setMicro(micronutrient) {
 			this.selectedMicro = micronutrient
+		},
+
+		search(items) {
+			const query = this.searched.toLowerCase()
+
+			if (!query) {
+				return items
+			} 
+
+			return items.filter(item => 
+				item.name.toLowerCase().startsWith(query)
+			)
 		}
     }
 }
@@ -79,9 +94,12 @@ export default {
 				</button>
 			</div>
         </div>
+		<div class="search-bar">
+			<input type="text" v-model="searched" placeholder="Food name...">
+		</div>
 
-        <div v-if = "filteredFoods.length > 0" class = "foods-list">
-            <FoodCard v-for = "food in filteredFoods" :key = "food.id" :foodItem = "food" />
+        <div v-if = "search(filteredFoods).length > 0" class = "foods-list">
+            <FoodCard v-for = "food in search(filteredFoods)" :key = "food.id" :foodItem = "food" />
         </div>
 		<div v-else class = "no-foods-text">
 			<p>No foods found... change filters!</p>
@@ -115,6 +133,40 @@ export default {
 .no-foods-text p {
 	font-size: 1.5rem;
 	margin: 0;
+}
+
+.search-bar {
+	display: flex;
+	justify-content: center;
+	margin-bottom: 2rem;
+}
+
+.search-bar input {
+	width: 100%;
+	max-width: 320px;
+	padding: 0.5rem 1rem;
+	font-family: "JetBrains Mono", monospace;
+	font-size: 0.9rem;
+	color: var(--color-text);
+	background: #e4e49f;
+	border-radius: 2px;
+	border: 2px solid rgba(0, 0, 0, 0.15);
+	border-right: 2px solid #b8b84d;
+	border-bottom: 2px solid #b8b84d;
+	box-shadow: 2px 2px 0 #b8b84d, 3px 3px 6px rgba(0, 0, 0, 0.1);
+	transform: translate(0, 0);
+	transition: box-shadow 0.2s, transform 0.2s;
+}
+
+.search-bar input::placeholder {
+	color: rgba(0, 0, 0, 0.35);
+}
+
+.search-bar input:focus {
+	outline: none;
+	background: #e4e49f;
+	box-shadow: 0.5px 0.5px 0 #b8b84d, 1px 1px 2px rgba(0, 0, 0, 0.08);
+	transform: translate(1px, 1px);
 }
 
 .filters {
@@ -179,6 +231,12 @@ export default {
 @media (max-width: 768px) {
 	.add-food {
 		padding: 1rem;
+	}
+
+	.search-bar input {
+		max-width: 100%;
+		font-size: 0.85rem;
+		padding: 0.45rem 0.75rem;
 	}
 
 	.foods-list .food-card {
