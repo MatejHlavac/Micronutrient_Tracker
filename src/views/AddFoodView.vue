@@ -1,6 +1,7 @@
 <script>
 import foodsData from '@/data/foods.json'
 import FoodCard from '@/components/FoodCard.vue'
+import Micronutrients from '@/data/micronutrients.json'
 
 export default {
     name: 'AddFoodView',
@@ -12,24 +13,46 @@ export default {
     data() {
         return {
             foods: foodsData,
-            selectedCategory: 'all'
+			micronuts: Micronutrients,
+            selectedCategory: 'all',
+			selectedMicro: 'all'
         }
     },
 
     computed: {
         filteredFoods() {
-            if (this.selectedCategory === 'all') {
+            if (this.selectedCategory === 'all' && this.selectedMicro === 'all') {
                 return this.foods
-            }
+            } 
+			else if (this.selectedCategory === 'all' && this.selectedMicro !== 'all') {
+				return this.foods.filter(food => 
+					Object.keys(food.micronutrients).some(micronutrient => micronutrient === this.selectedMicro))
+			} 
+			else if (this.selectedCategory !== 'all' && this.selectedMicro === 'all') {
+				return this.foods.filter(food => 
+					food.category === this.selectedCategory)
+			} 
+			else {
+				return (this.foods.filter(food => 
+					food.category === this.selectedCategory && 
+					Object.keys(food.micronutrients).some(micronutrient => 
+						micronutrient === this.selectedMicro)))
+			}
+        },
 
-            return this.foods.filter(food => food.category === this.selectedCategory)
-        }
+		micronutrientIds() {
+			return ['all', ...this.micronuts.map(item => item.id)]
+		}
     },
 
     methods: {
         setCategory(category) {
             this.selectedCategory = category
-        }
+        },
+
+		setMicro(micronutrient) {
+			this.selectedMicro = micronutrient
+		}
     }
 }
 </script>
@@ -37,20 +60,33 @@ export default {
 <template>
     <div class = "add-food">
         <div class = "filters">
-            <button v-for="category in ['all', 'vegetable', 'fruit', 'meat', 'fish']"
-                :key = "category"
-                @click = "setCategory(category)"
-                :class = "['filter-button', {active: selectedCategory === category}]"
-            >
-            {{ category === 'all' ? 'All' : category.charAt(0).toUpperCase() + category.slice(1) }}
-            </button>
+			<div class = "category-filters">
+				<button v-for="category in ['all', 'vegetable', 'fruit', 'meat', 'fish']"
+					:key = "category"
+					@click = "setCategory(category)"
+					:class = "['category-filter-button', {active: selectedCategory === category}]"
+				>
+				{{ category === 'all' ? 'All' : category.charAt(0).toUpperCase() + category.slice(1) }}
+				</button>
+			</div>
+			<div class = "micronutrient-filters">
+				<button v-for="micronutrient in micronutrientIds"
+					:key = "micronutrient"
+					@click = "setMicro(micronutrient)"
+					:class = "['micronutrient-filter-button', {active: selectedMicro === micronutrient}]"
+				>
+				{{ micronutrient === 'all' ? 'All' : (micronuts.find(m => m.id === micronutrient)?.name ?? micronutrient) }}
+				</button>
+			</div>
         </div>
 
-        <div class = "foods-list">
+        <div v-if = "filteredFoods.length > 0" class = "foods-list">
             <FoodCard v-for = "food in filteredFoods" :key = "food.id" :foodItem = "food" />
         </div>
+		<div v-else class = "no-foods-text">
+			<p>No foods found... change filters!</p>
+		</div>
     </div>
-
 </template>
 
 <style scoped>
@@ -71,16 +107,35 @@ export default {
 	width: 100%;
 }
 
+.no-foods-text {
+	text-align: center;
+	margin-top: 6rem;
+}
+
+.no-foods-text p {
+	font-size: 1.5rem;
+	margin: 0;
+}
+
 .filters {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 1rem;
+	margin-bottom: 2rem;
+}
+
+.category-filters,
+.micronutrient-filters {
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	gap: 0.5rem;
-	margin-bottom: 2rem;
 	flex-wrap: wrap;
 }
 
-.filter-button {
+.category-filter-button,
+.micronutrient-filter-button {
 	padding: 0.5rem 1rem;
 	background: #d3d363;
 	border-radius: 2px;
@@ -99,21 +154,25 @@ export default {
 	border-left: none;
 }
 
-.filter-button:first-child {
+.category-filter-button:first-child,
+.micronutrient-filter-button:first-child {
 	margin-right: 1rem;
 }
 
-.filter-button:hover {
+.category-filter-button:hover,
+.micronutrient-filter-button:hover {
 	box-shadow: 1px 1px 0 #b8b84d, 2px 2px 4px rgba(0, 0, 0, 0.1);
 	transform: translate(1px, 1px);
 }
 
-.filter-button:active {
+.category-filter-button:active,
+.micronutrient-filter-button:active {
 	box-shadow: 0.5px 0.5px 0 #b8b84d, 1px 1px 2px rgba(0, 0, 0, 0.08);
 	transform: translate(1.5px, 1.5px);
 }
 
-.filter-button.active {
+.category-filter-button.active,
+.micronutrient-filter-button.active {
 	background: #e4e49f;
 }
 
@@ -126,12 +185,14 @@ export default {
 		max-width: 100%;
 	}
 
-	.filter-button {
+	.category-filter-button,
+	.micronutrient-filter-button {
 		font-size: 0.7rem;
 		padding: 0.4rem 0.8rem;
 	}
 
-	.filter-button:first-child {
+	.category-filter-button:first-child,
+	.micronutrient-filter-button:first-child {
 		margin-right: 0.5rem;
 	}
 }
