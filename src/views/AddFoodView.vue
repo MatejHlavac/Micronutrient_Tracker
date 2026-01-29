@@ -16,7 +16,8 @@ export default {
 			micronuts: Micronutrients,
             selectedCategory: 'all',
 			selectedMicro: 'all',
-			searched: ''
+			searched: '',
+			isSorted: null
         }
     },
 
@@ -45,6 +46,10 @@ export default {
 			return ['all', ...this.micronuts.map(item => item.id)]
 		},
 
+		displayedFoods() {
+			return this.sortFood(this.search(this.filteredFoods))
+		}
+
 		
     },
 
@@ -67,6 +72,18 @@ export default {
 			return items.filter(item => 
 				item.name.toLowerCase().startsWith(query)
 			)
+		},
+
+		sortFood(items) {
+			if (this.isSorted) {
+				return [...items].sort((a, b) => a.name.localeCompare(b.name, 'sk'))
+			}
+
+			return items
+		},
+
+		toggleSort() {
+			this.isSorted = !this.isSorted
 		}
     }
 }
@@ -93,13 +110,14 @@ export default {
 				{{ micronutrient === 'all' ? 'All' : (micronuts.find(m => m.id === micronutrient)?.name ?? micronutrient) }}
 				</button>
 			</div>
+			<button @click="toggleSort" :class="['sort-button', {active: isSorted}]">A-Z</button>
         </div>
 		<div class="search-bar">
 			<input type="text" v-model="searched" placeholder="Food name...">
 		</div>
 
-        <div v-if = "search(filteredFoods).length > 0" class = "foods-list">
-            <FoodCard v-for = "food in search(filteredFoods)" :key = "food.id" :foodItem = "food" />
+        <div v-if = "displayedFoods.length > 0" class = "foods-list">
+            <FoodCard v-for = "food in displayedFoods" :key = "food.id" :foodItem = "food" />
         </div>
 		<div v-else class = "no-foods-text">
 			<p>No foods found... change filters!</p>
