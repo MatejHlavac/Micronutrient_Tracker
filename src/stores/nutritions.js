@@ -10,7 +10,8 @@ export const useNutritionStore = defineStore('nutrition', {
             dailyStats: {}, 
             weeklyStats: {}, 
             lastActiveDate: null,
-            lastActiveWeek: null
+            lastActiveWeek: null, 
+            weeklyHistory: {}
 
         }
     },
@@ -110,10 +111,11 @@ export const useNutritionStore = defineStore('nutrition', {
         saveToLocalStorage() {
             const data = {
                 dailyFoods: this.dailyFoods,
-                dailyStats: this.dailyStats, 
+                dailyStats: this.dailyStats,
                 weeklyStats: this.weeklyStats,
                 lastActiveDate: this.lastActiveDate,
-                lastActiveWeek: this.lastActiveWeek
+                lastActiveWeek: this.lastActiveWeek,
+                weeklyHistory: this.weeklyHistory
             }
 
             localStorage.setItem('nutritionStore', JSON.stringify(data))
@@ -131,6 +133,7 @@ export const useNutritionStore = defineStore('nutrition', {
                 this.weeklyStats = data.weeklyStats || {}
                 this.lastActiveDate = data.lastActiveDate || null
                 this.lastActiveWeek = data.lastActiveWeek || null
+                this.weeklyHistory = data.weeklyHistory || {}
             }
         },
 
@@ -141,6 +144,13 @@ export const useNutritionStore = defineStore('nutrition', {
             const today = new Date().toISOString().split('T')[0]
 
             if (this.lastActiveDate !== today) {
+                if (this.lastActiveDate !== null) {
+                    this.weeklyHistory[this.lastActiveDate] = this.historyItem
+                    if (Object.keys(this.weeklyHistory).length > 7) {
+                        const oldestKey = Object.keys(this.weeklyHistory).sort()[0]
+                        delete this.weeklyHistory[oldestKey]
+                    }
+                }
                 this.dailyFoods = []
                 this.dailyStats = {}
                 this.lastActiveDate = today
@@ -166,6 +176,12 @@ export const useNutritionStore = defineStore('nutrition', {
             const weekNum = Math.ceil((((d - yearStart) / dayInMil) + 1 ) / 7)
             return `${d.getFullYear()}-W${weekNum.toString().padStart(2, '0')}`
  
+        }
+    },
+
+    getters: {
+        historyItem() {
+            return {foods: this.dailyFoods, stats: this.dailyStats}
         }
     }
 
