@@ -29,12 +29,18 @@ export default {
             const formatter = new Intl.DateTimeFormat('en-US', {day: 'numeric', month: 'numeric', year: 'numeric'})
             return formatter.format(this.date)
         }
+    },
+
+    methods: {
+        showDayContent() {
+            this.$emit('show-content', this.dayKey)
+        }
     }
 }
 </script>
 
 <template>
-    <div class="history-day-card">
+    <div class="history-day-card" @click="showDayContent">
         <div class="day-name">{{ dayInWeek }}</div>
         <div class="day-full-date">{{ fullDate }}</div>
     </div>

@@ -9,6 +9,12 @@ export default {
         HistoryDayCard
     },
 
+    date: {
+        return() {
+            showedContent: ''
+        }
+    },
+
     computed: {
         store() {
             return useNutritionStore()
@@ -25,6 +31,16 @@ export default {
         emptyContainersCount() {
             return Math.max(0, 7 - Object.keys(this.history).length)
         }
+    },
+
+    methods: {
+        showContent(dayKey) {
+            if (!this.showedContent || this.showedContent !== dayKey) {
+                this.showedContent = dayKey
+            } else {
+                this.showedContent = ''
+            }
+        }
     }
 
 }
@@ -40,7 +56,8 @@ export default {
                 v-for="[dayKey, dayData] in sortedHistoryEntries"
                 :key="dayKey"
                 :dayData="dayData"
-                :dayKey="dayKey">
+                :dayKey="dayKey"
+                @show-content="showContent">
             </HistoryDayCard>
         </div>
     </div>
