@@ -181,7 +181,7 @@ export const useNutritionStore = defineStore('nutrition', {
 
     getters: {
         historyItem() {
-            return {foods: this.dailyFoods, stats: this.dailyStats}
+            return { foods: [...this.dailyFoods], stats: { ...this.dailyStats } }
         }
     }
 

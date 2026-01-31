@@ -1,16 +1,18 @@
 <script>
 import { useNutritionStore } from '@/stores/nutritions.js'
 import HistoryDayCard from '@/components/HistoryDayCard.vue'
+import HistoryFoodCard from '@/components/HistoryFoodCard.vue'
 
 export default {
     name: 'HistoryView',
 
     components: {
-        HistoryDayCard
+        HistoryDayCard,
+        HistoryFoodCard
     },
 
-    date: {
-        return() {
+    data() {
+        return{
             showedContent: ''
         }
     },
@@ -53,12 +55,19 @@ export default {
         <div class="history-cards">
             <div v-for="n in emptyContainersCount" :key="'empty-' + n" class="empty-container"><span class="empty-container-text">No data</span></div>
             <HistoryDayCard
-                v-for="[dayKey, dayData] in sortedHistoryEntries"
+                v-for="([dayKey, dayData]) in sortedHistoryEntries"
                 :key="dayKey"
                 :dayData="dayData"
                 :dayKey="dayKey"
                 @show-content="showContent">
             </HistoryDayCard>
+        </div>
+        <div v-if="showedContent" class="day-content">
+            <HistoryFoodCard
+                v-for="foodId in store.weeklyHistory[showedContent].foods"
+                :key="foodId"
+                :foodId="foodId">
+            </HistoryFoodCard>
         </div>
     </div>
 </template>

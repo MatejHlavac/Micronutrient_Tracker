@@ -48,33 +48,49 @@ export default {
 
 <style scoped>
 .history-day-card {
-    border: 1px solid var(--color-border);
-    padding: 1rem;
-    background: #e4e49f;
+    padding: 0.5rem 1rem;
+    background: #d3d363;
+    border-radius: 2px;
+    transition: all 0.2s;
+    color: var(--color-text);
+    cursor: pointer;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 0.8rem;
+    font-weight: 500;
+    box-shadow: 2px 2px 0 #b8b84d, 3px 3px 6px rgba(0, 0, 0, 0.15);
+    transform: translate(0, 0);
+    border-right: 2px solid #b8b84d;
+    border-bottom: 2px solid #b8b84d;
+    border-top: none;
+    border-left: none;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 0.5rem;
     width: 100%;
     max-width: 280px;
-    box-shadow: 2px 2px 0 #b8b84d, 3px 3px 6px rgba(0, 0, 0, 0.1);
-    border-radius: 2px;
-    border-top: none;
-    border-left: none;
-    border-right: 2px solid #b8b84d;
-    border-bottom: 2px solid #b8b84d;
+}
+
+.history-day-card:hover {
+    box-shadow: 1px 1px 0 #b8b84d, 2px 2px 4px rgba(0, 0, 0, 0.1);
+    transform: translate(1px, 1px);
+}
+
+.history-day-card:active {
+    box-shadow: 0.5px 0.5px 0 #b8b84d, 1px 1px 2px rgba(0, 0, 0, 0.08);
+    transform: translate(1.5px, 1.5px);
 }
 
 .day-name {
     margin: 0;
-    font-size: 1.2rem;
+    font-size: 1rem;
     font-weight: 500;
     color: var(--color-text);
 }
 
 .day-full-date {
     margin: 0;
-    font-size: 1rem;
+    font-size: 0.85rem;
     color: var(--color-text-secondary);
 }
 </style>
