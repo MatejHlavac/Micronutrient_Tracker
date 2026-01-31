@@ -10,6 +10,7 @@ export default {
             <RouterLink to = "/">HOME</RouterLink>
             <RouterLink to = "/add">FOODS</RouterLink>
             <RouterLink to = "/stats">STATISTICS</RouterLink>
+			<RouterLink to = "/history">HISTORY</RouterLink>
             <RouterLink to = "/info">INFO</RouterLink>
             <RouterLink to = "/about">ABOUT</RouterLink>
         </div>
