@@ -88,16 +88,20 @@ export default {
             </HistoryDayCard>
         </div>
         <div v-if="showedContent" class="day-content">
-            <HistoryFoodCard
-                v-for="foodId in store.weeklyHistory[showedContent].foods"
-                :key="foodId"
-                :foodId="foodId">
-            </HistoryFoodCard>
-            <NutrientCard
-                v-for="nutrientData in micronutrientsWithStats(showedContent)"
-                :key="nutrientData.id"
-                :nutrient="nutrientData">
-            </NutrientCard>
+            <div class="day-content-left">
+                <HistoryFoodCard
+                    v-for="foodId in store.weeklyHistory[showedContent].foods"
+                    :key="foodId"
+                    :foodId="foodId">
+                </HistoryFoodCard>
+            </div>
+            <div class="day-content-right">
+                <NutrientCard
+                    v-for="nutrientData in micronutrientsWithStats(showedContent)"
+                    :key="nutrientData.id"
+                    :nutrient="nutrientData">
+                </NutrientCard>
+            </div>
         </div>
     </div>
 </template>
@@ -142,5 +146,28 @@ export default {
 .empty-container-text {
     color: rgba(0, 0, 0, 0.4);
     font-size: 1rem;
+}
+
+.day-content {
+    display: flex;
+    flex-direction: row;
+    gap: 7rem;
+    margin-top: 5rem;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.day-content-left {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    min-width: 520px;
+}
+
+.day-content-right {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    min-width: 560px;
 }
 </style>
