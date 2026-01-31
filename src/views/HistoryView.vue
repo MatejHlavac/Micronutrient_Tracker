@@ -2,18 +2,54 @@
 import { useNutritionStore } from '@/stores/nutritions.js'
 import HistoryDayCard from '@/components/HistoryDayCard.vue'
 import HistoryFoodCard from '@/components/HistoryFoodCard.vue'
+import Micronutrients from '@/data/micronutrients.json'
+import NutrientCard from '@/components/NutrientCard.vue'
+
 
 export default {
     name: 'HistoryView',
 
     components: {
         HistoryDayCard,
-        HistoryFoodCard
+        HistoryFoodCard,
+        NutrientCard
     },
 
     data() {
         return{
             showedContent: ''
+        }
+    },
+
+    methods: {
+        micronutrientsWithStats(dayKey) {
+            const statsKeys = Object.keys(this.store.weeklyHistory[dayKey].stats)
+            const statsData = statsKeys.map(key => {
+                const nutrient = Micronutrients.find(nutrient => nutrient.id === key)
+                const maxValue = nutrient.maxValue
+
+                const currentValue = this.store.weeklyHistory[dayKey].stats[key]
+                const percentage = Math.min((currentValue / maxValue) * 100, 100)
+
+                return {
+                    id: nutrient.id,
+                    name: nutrient.name,
+                    type: nutrient.type,
+                    currentValue: currentValue,
+                    maxValue: maxValue,
+                    percentage: percentage
+                }
+            })
+
+            return statsData
+        },
+
+        showContent(dayKey) {
+            if (!this.showedContent || this.showedContent !== dayKey) {
+                this.showedContent = dayKey
+            } else {
+                this.showedContent = ''
+            }
         }
     },
 
@@ -33,18 +69,7 @@ export default {
         emptyContainersCount() {
             return Math.max(0, 7 - Object.keys(this.history).length)
         }
-    },
-
-    methods: {
-        showContent(dayKey) {
-            if (!this.showedContent || this.showedContent !== dayKey) {
-                this.showedContent = dayKey
-            } else {
-                this.showedContent = ''
-            }
-        }
     }
-
 }
 
 </script>
@@ -68,6 +93,11 @@ export default {
                 :key="foodId"
                 :foodId="foodId">
             </HistoryFoodCard>
+            <NutrientCard
+                v-for="nutrientData in micronutrientsWithStats(showedContent)"
+                :key="nutrientData.id"
+                :nutrient="nutrientData">
+            </NutrientCard>
         </div>
     </div>
 </template>
