@@ -10,6 +10,11 @@ export default {
         foodId: {
             type: String,
             required: true
+        },
+         
+        count: {
+            type: Number,
+            required: true
         }
     },
 
@@ -41,6 +46,7 @@ export default {
         <div class="food-content">
             <h3>{{ food.name }}</h3>
             <p class="category">{{ food.category }}</p>
+            <p class="food-count">Added: {{ count }}x</p>
             <div v-if="micronutrients.length > 0" class="micronutrients">
                 <div class="micronutrients-list">
                     <span v-for="nutrient in micronutrients" :key="nutrient" class="nutrient-tag">

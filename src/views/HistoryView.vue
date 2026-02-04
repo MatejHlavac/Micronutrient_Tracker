@@ -68,9 +68,28 @@ export default {
 
         emptyContainersCount() {
             return Math.max(0, 7 - Object.keys(this.history).length)
+        },
+
+        foodsWithCounts() {
+            if (this.showedContent) {
+                const foodArr = this.foods
+                const counts = {}
+
+                for (const item of foodArr) {
+                    counts[item] = ((counts[item] || 0) + 1)
+                }
+
+                return counts
+            }
+            return {}
+        },
+
+        foods() {
+            return this.store.weeklyHistory[this.showedContent].foods
         }
     }
 }
+
 
 </script>
 
@@ -90,9 +109,10 @@ export default {
         <div v-if="showedContent" class="day-content">
             <div class="day-content-left">
                 <HistoryFoodCard
-                    v-for="foodId in store.weeklyHistory[showedContent].foods"
-                    :key="foodId"
-                    :foodId="foodId">
+                    v-for="food in Object.keys(foodsWithCounts)"
+                    :key="food"
+                    :foodId="food"
+                    :count="foodsWithCounts[food]">
                 </HistoryFoodCard>
             </div>
             <div class="day-content-right">
