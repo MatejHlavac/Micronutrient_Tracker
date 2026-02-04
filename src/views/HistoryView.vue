@@ -107,20 +107,26 @@ export default {
             </HistoryDayCard>
         </div>
         <div v-if="showedContent" class="day-content">
-            <div class="day-content-left">
-                <HistoryFoodCard
-                    v-for="food in Object.keys(foodsWithCounts)"
-                    :key="food"
-                    :foodId="food"
-                    :count="foodsWithCounts[food]">
-                </HistoryFoodCard>
+            <div class="content-box content-box-foods">
+                <h3 class="content-box-title">Foods</h3>
+                <div class="day-content-left">
+                    <HistoryFoodCard
+                        v-for="food in Object.keys(foodsWithCounts)"
+                        :key="food"
+                        :foodId="food"
+                        :count="foodsWithCounts[food]">
+                    </HistoryFoodCard>
+                </div>
             </div>
-            <div class="day-content-right">
-                <NutrientCard
-                    v-for="nutrientData in micronutrientsWithStats(showedContent)"
-                    :key="nutrientData.id"
-                    :nutrient="nutrientData">
-                </NutrientCard>
+            <div class="content-box content-box-micronutrients">
+                <h3 class="content-box-title">Micronutrients</h3>
+                <div class="day-content-right">
+                    <NutrientCard
+                        v-for="nutrientData in micronutrientsWithStats(showedContent)"
+                        :key="nutrientData.id"
+                        :nutrient="nutrientData">
+                    </NutrientCard>
+                </div>
             </div>
         </div>
     </div>
@@ -171,23 +177,47 @@ export default {
 .day-content {
     display: flex;
     flex-direction: row;
-    gap: 7rem;
+    gap: 2rem;
     margin-top: 5rem;
     justify-content: center;
     align-items: flex-start;
+}
+
+.content-box {
+    border: 2px solid #b8b84d;
+    border-radius: 4px;
+    padding: 1.25rem;
+    background: #e4e49f;
+    box-sizing: border-box;
+    box-shadow: 2px 2px 0 #b8b84d, 3px 3px 6px rgba(0, 0, 0, 0.08);
+}
+
+.content-box-title {
+    margin: 0 0 1rem 0;
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--color-text);
+    text-align: center;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #b8b84d;
+}
+
+.content-box-foods .day-content-left,
+.content-box-micronutrients .day-content-right {
+    margin: 0;
 }
 
 .day-content-left {
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    min-width: 520px;
+    min-width: 560px;
 }
 
 .day-content-right {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 1rem;
-    min-width: 560px;
+    min-width: 620px;
 }
 </style>
