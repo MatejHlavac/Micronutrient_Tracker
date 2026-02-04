@@ -11,7 +11,8 @@ export const useNutritionStore = defineStore('nutrition', {
             weeklyStats: {}, 
             lastActiveDate: null,
             lastActiveWeek: null, 
-            weeklyHistory: {}
+            weeklyHistory: {},
+            favoriteFoods: []
 
         }
     },
@@ -115,7 +116,8 @@ export const useNutritionStore = defineStore('nutrition', {
                 weeklyStats: this.weeklyStats,
                 lastActiveDate: this.lastActiveDate,
                 lastActiveWeek: this.lastActiveWeek,
-                weeklyHistory: this.weeklyHistory
+                weeklyHistory: this.weeklyHistory,
+                favoriteFoods: this.favoriteFoods
             }
 
             localStorage.setItem('nutritionStore', JSON.stringify(data))
@@ -134,6 +136,7 @@ export const useNutritionStore = defineStore('nutrition', {
                 this.lastActiveDate = data.lastActiveDate || null
                 this.lastActiveWeek = data.lastActiveWeek || null
                 this.weeklyHistory = data.weeklyHistory || {}
+                this.favoriteFoods = data.favoriteFoods || []
             }
         },
 

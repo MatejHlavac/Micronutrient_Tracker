@@ -2,6 +2,8 @@
 import foodsData from '@/data/foods.json'
 import FoodCard from '@/components/FoodCard.vue'
 import Micronutrients from '@/data/micronutrients.json'
+import { useNutritionStore } from '@/stores/nutritions';
+
 
 export default {
     name: 'AddFoodView',
@@ -19,11 +21,16 @@ export default {
 			searched: '',
 			isSorted: null,
 			categoryDropdownOpen: false,
-			micronutrientDropdownOpen: false
+			micronutrientDropdownOpen: false,
+			favShowed: null
         }
     },
 
     computed: {
+		store() {
+            return useNutritionStore()
+        },
+
         filteredFoods() {
             if (this.selectedCategory === 'all' && this.selectedMicro === 'all') {
                 return this.foods
@@ -49,7 +56,7 @@ export default {
 		},
 
 		displayedFoods() {
-			return this.sortFood(this.search(this.filteredFoods))
+			return this.showFav(this.sortFood(this.search(this.filteredFoods)))
 		}
 
 		
@@ -84,6 +91,18 @@ export default {
 			}
 
 			return items
+		},
+
+		showFav(items) {
+			if (this.favShowed) {
+				const favs = this.store.favoriteFoods || []
+				return items.filter(food => favs.indexOf(food.id) !== -1)
+			}
+			return items
+		},
+
+		toggleFav() {
+			this.favShowed = !this.favShowed
 		},
 
 		toggleSort() {
@@ -139,6 +158,7 @@ export default {
 				</div>
 			</div>
 			<button @click="toggleSort" :class="['sort-button', {active: isSorted}]">A-Z</button>
+			<button @click="toggleFav" :class="['fav-button', {active: favShowed}]">Favorite</button>
         </div>
 		<div class="search-bar">
 			<input type="text" v-model="searched" placeholder="Food name...">

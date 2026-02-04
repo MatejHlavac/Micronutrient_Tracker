@@ -19,7 +19,18 @@ export default {
 
         removeFood() {
             this.store.removeFood(this.foodItem.id)
-        }
+        },
+
+		addToFavorite() {
+			const id = this.foodItem.id
+			const index = this.store.favoriteFoods.indexOf(id)
+
+			if (index === -1) {
+				this.store.favoriteFoods.push(id)
+			} else {
+				this.store.favoriteFoods.splice(index, 1)
+			}
+		}
     },
 
     computed: {
@@ -72,6 +83,9 @@ export default {
                 <button v-if="addedCount > 0" @click = "removeFood()" class = "remove-button">-</button>
             </div>
         </div>
+		<div class="button-box">
+			<button @click="addToFavorite">Fav</button>
+		</div>
     </div>
 </template>
 
