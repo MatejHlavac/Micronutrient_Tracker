@@ -3,6 +3,8 @@ import foodsData from '@/data/foods.json'
 import FoodCard from '@/components/FoodCard.vue'
 import Micronutrients from '@/data/micronutrients.json'
 import { useNutritionStore } from '@/stores/nutritions';
+
+import SvgIcon from '@jamescoyle/vue-icon';
 import { mdiFilter } from '@mdi/js';
 import { mdiFilterOutline } from '@mdi/js';
 
@@ -11,7 +13,8 @@ export default {
     name: 'AddFoodView',
 
     components: {
-        FoodCard
+        FoodCard,
+        SvgIcon
     },
 
     data() {
@@ -26,7 +29,6 @@ export default {
 			micronutrientDropdownOpen: false,
 			favShowed: null,
 			filtersShowed: true,
-
 			filter: mdiFilter,
 			filterOutlined: mdiFilterOutline
         }
@@ -137,8 +139,10 @@ export default {
 </script>
 
 <template>
-    <div class = "add-food">
-        <div v-if="filtersShowed" class = "filters">
+    <div class="add-food">
+        <Transition name="filters-slide">
+            <div v-if="filtersShowed" class="filters-wrapper">
+                <div class="filters">
 			<div ref="categoryDropdown" class="filter-dropdown" tabindex="0" @focusin="categoryDropdownOpen = true" @focusout="categoryDropdownOpen = false">
 				<button type="button" class="filter-dropdown-trigger category-trigger" @mousedown="maybeCloseCategoryDropdown($event)">
 					Category: {{ selectedCategory === 'all' ? 'All' : selectedCategory.charAt(0).toUpperCase() + selectedCategory.slice(1) }} ▼
@@ -169,14 +173,18 @@ export default {
 			</div>
 			<button @click="toggleSort" :class="['sort-button', {active: isSorted}]">A-Z</button>
 			<button @click="toggleFav" :class="['fav-button', {active: favShowed}]">Favorite</button>
-        </div>
-		<div class="search-bar">
-			<input type="text" v-model="searched" placeholder="Food name...">
-		</div>
-		<div class="toggle-filters">
-			<button @click="showFilters">
-				<svg-icon type="mdi" :path="filtersShowed ? filter : filterOutlined"></svg-icon>
-			</button>
+                </div>
+            </div>
+        </Transition>
+		<div class="search-row">
+			<div class="search-bar">
+				<input type="text" v-model="searched" placeholder="Food name...">
+			</div>
+			<div class="toggle-filters">
+				<button @click="showFilters" :class="['toggle-filters-button', { active: filtersShowed }]">
+					<svg-icon type="mdi" :path="filtersShowed ? filter : filterOutlined"></svg-icon>
+				</button>
+			</div>
 		</div>
 
         <div v-if = "displayedFoods.length > 0" class = "foods-list">
@@ -216,15 +224,24 @@ export default {
 	margin: 0;
 }
 
-.search-bar {
+.search-row {
 	display: flex;
 	justify-content: center;
+	align-items: center;
+	gap: 0.5rem;
 	margin-bottom: 2rem;
+	flex-wrap: wrap;
+}
+
+.search-bar {
+	display: flex;
+	flex: 1;
+	min-width: 0;
+	max-width: 320px;
 }
 
 .search-bar input {
 	width: 100%;
-	max-width: 320px;
 	padding: 0.5rem 1rem;
 	font-family: "JetBrains Mono", monospace;
 	font-size: 0.9rem;
@@ -250,13 +267,68 @@ export default {
 	transform: translate(1px, 1px);
 }
 
+.toggle-filters {
+	flex-shrink: 0;
+}
+
+.toggle-filters-button {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 2.5rem;
+	height: 2.5rem;
+	padding: 0.35rem;
+	background: rgba(184, 184, 77, 0.12);
+	border: 1px solid rgba(184, 184, 77, 0.4);
+	border-radius: 3px;
+	color: #7a7a28;
+	cursor: pointer;
+	transition: color 0.2s, background 0.2s, border-color 0.2s;
+	font-size: 1.35rem;
+}
+.toggle-filters-button:hover {
+	color: #5a5a1a;
+	background: rgba(184, 184, 77, 0.25);
+}
+.toggle-filters-button.active {
+	color: #6a6a22;
+	background: rgba(228, 228, 159, 0.35);
+}
+.toggle-filters-button.active:hover {
+	color: #5a5a1a;
+	background: rgba(228, 228, 159, 0.5);
+}
+
+.toggle-filters-button :deep(svg) {
+	width: 1.5em;
+	height: 1.5em;
+}
+
+.filters-wrapper {
+	overflow: hidden;
+	max-height: 260px;
+	margin-bottom: 2rem;
+}
+
+.filters-slide-enter-active {
+	transition: max-height 0.45s ease 0s, margin-bottom 0.45s ease 0s, opacity 0.45s ease 0.2s;
+}
+.filters-slide-leave-active {
+	transition: max-height 0.45s ease 0.2s, margin-bottom 0.45s ease 0.2s, opacity 0.45s ease 0s;
+}
+.filters-slide-enter-from,
+.filters-slide-leave-to {
+	max-height: 0;
+	margin-bottom: 0;
+	opacity: 0;
+}
+
 .filters {
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: center;
 	align-items: center;
 	gap: 1rem;
-	margin-bottom: 2rem;
 }
 
 .filter-dropdown {
