@@ -3,6 +3,8 @@ import foodsData from '@/data/foods.json'
 import FoodCard from '@/components/FoodCard.vue'
 import Micronutrients from '@/data/micronutrients.json'
 import { useNutritionStore } from '@/stores/nutritions';
+import { mdiFilter } from '@mdi/js';
+import { mdiFilterOutline } from '@mdi/js';
 
 
 export default {
@@ -22,7 +24,11 @@ export default {
 			isSorted: null,
 			categoryDropdownOpen: false,
 			micronutrientDropdownOpen: false,
-			favShowed: null
+			favShowed: null,
+			filtersShowed: true,
+
+			filter: mdiFilter,
+			filterOutlined: mdiFilterOutline
         }
     },
 
@@ -121,6 +127,10 @@ export default {
 				document.activeElement?.blur()
 				e.preventDefault()
 			}
+		},
+
+		showFilters() {
+			this.filtersShowed = !this.filtersShowed
 		}
     }
 }
@@ -128,7 +138,7 @@ export default {
 
 <template>
     <div class = "add-food">
-        <div class = "filters">
+        <div v-if="filtersShowed" class = "filters">
 			<div ref="categoryDropdown" class="filter-dropdown" tabindex="0" @focusin="categoryDropdownOpen = true" @focusout="categoryDropdownOpen = false">
 				<button type="button" class="filter-dropdown-trigger category-trigger" @mousedown="maybeCloseCategoryDropdown($event)">
 					Category: {{ selectedCategory === 'all' ? 'All' : selectedCategory.charAt(0).toUpperCase() + selectedCategory.slice(1) }} ▼
@@ -162,6 +172,11 @@ export default {
         </div>
 		<div class="search-bar">
 			<input type="text" v-model="searched" placeholder="Food name...">
+		</div>
+		<div class="toggle-filters">
+			<button @click="showFilters">
+				<svg-icon type="mdi" :path="filtersShowed ? filter : filterOutlined"></svg-icon>
+			</button>
 		</div>
 
         <div v-if = "displayedFoods.length > 0" class = "foods-list">
