@@ -2,9 +2,24 @@
 import { useNutritionStore } from '@/stores/nutritions';
 import foodsData from '@/data/foods.json'
 import micronutrientsData from '@/data/micronutrients.json'
+import SvgIcon from '@jamescoyle/vue-icon';
+import { mdiHeart } from '@mdi/js';
+import { mdiHeartOutline } from '@mdi/js';
+
 
 export default {
     name: 'FoodCard',
+	components: {
+		SvgIcon
+	},
+
+	data() {
+		return {
+			path: mdiHeart,
+			pathOutlined: mdiHeartOutline,
+		}
+	},
+
     props: {
         foodItem: {
             type: Object, 
@@ -37,6 +52,17 @@ export default {
         store() {
             return useNutritionStore()
         },
+
+		isFavorite() {
+			const id = this.foodItem.id
+			const index = this.store.favoriteFoods.indexOf(id)
+
+			if (index !== -1) {
+				return true
+			} else {
+				return false
+			}
+		},
         
         addedCount() {
             return this.store.dailyFoods.filter(id => id === this.foodItem.id).length
@@ -64,10 +90,18 @@ export default {
 </script>
 
 <template>
-    <div class = "food-card">
+    <div class="food-card">
         <div class="food-content">
-            <h3>{{ foodItem.name }}</h3>
-            <p class = "category">{{ foodItem.category }}</p>
+            <div class="name-row">
+                <button v-if="isFavorite" class="fav-button-filled" @click="addToFavorite">
+                    <svg-icon type="mdi" :path="path"></svg-icon>
+                </button>
+                <button v-else class="fav-button-outlined" @click="addToFavorite">
+                    <svg-icon type="mdi" :path="pathOutlined"></svg-icon>
+                </button>
+                <h3>{{ foodItem.name }}</h3>
+            </div>
+            <p class="category">{{ foodItem.category }}</p>
             <div v-if="micronutrients.length > 0" class="micronutrients">
                 <div class="micronutrients-list">
                     <span v-for="nutrient in micronutrients" :key="nutrient.name" class="nutrient-tag">
@@ -77,15 +111,12 @@ export default {
             </div>
         </div>
         <div class="buttons-container">
-            <p v-if = "addedCount > 0" class = "added-count">Added: {{ addedCount }}x</p>
+            <p v-if="addedCount > 0" class="added-count">Added: {{ addedCount }}x</p>
             <div class="buttons">
-                <button @click = "addFood()" class = "add-button">+</button>
-                <button v-if="addedCount > 0" @click = "removeFood()" class = "remove-button">-</button>
+                <button @click="addFood()" class="add-button">+</button>
+                <button v-if="addedCount > 0" @click="removeFood()" class="remove-button">-</button>
             </div>
         </div>
-		<div class="button-box">
-			<button @click="addToFavorite">Fav</button>
-		</div>
     </div>
 </template>
 
@@ -103,14 +134,21 @@ export default {
 	flex: 1;
 }
 
-.food-card h3 {
-	margin: 0 0 0.5rem 0;
+.name-row {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	margin-bottom: 0.5rem;
+}
+
+.name-row h3 {
+	margin: 0;
 	font-size: 1.4rem;
 	color: var(--color-text);
 }
 
 .food-card .category {
-	margin: 0;
+	margin: 0 0 0.5rem 0;
 	color: var(--color-text-secondary);
 	font-size: 0.9rem;
 	text-transform: capitalize;
@@ -122,6 +160,7 @@ export default {
 	gap: 1rem;
 	align-items: center;
 	justify-content: center;
+	margin-right: 1.5rem;
 }
 
 .added-count {
@@ -218,5 +257,38 @@ export default {
 	padding: 0.25rem 0.5rem;
 	border: 1px solid var(--color-border);
 	background: #e4e49f;
+}
+
+.name-row .fav-button-filled,
+.name-row .fav-button-outlined {
+	background: none;
+	border: none;
+	padding: 0.2rem;
+	cursor: pointer;
+	flex-shrink: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: color 0.2s;
+	font-size: 0.75rem;
+}
+.name-row .fav-button-filled :deep(svg),
+.name-row .fav-button-outlined :deep(svg) {
+	width: 1.5em;
+	height: 1.5em;
+}
+
+.name-row .fav-button-filled {
+	color: #e07a7a;
+}
+.name-row .fav-button-filled:hover {
+	color: #c55a5a;
+}
+
+.name-row .fav-button-outlined {
+	color: rgba(224, 122, 122, 0.5);
+}
+.name-row .fav-button-outlined:hover {
+	color: rgba(224, 122, 122, 0.8);
 }
 </style>
