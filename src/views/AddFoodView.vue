@@ -385,6 +385,36 @@ export default {
 	background: #e4e49f;
 }
 
+.fav-button {
+	padding: 0.5rem 1rem;
+	background: #d3d363;
+	border-radius: 2px;
+	transition: all 0.2s;
+	text-transform: capitalize;
+	color: var(--color-text);
+	cursor: pointer;
+	font-family: "JetBrains Mono", monospace;
+	font-size: 0.8rem;
+	font-weight: 500;
+	box-shadow: 2px 2px 0 #b8b84d, 3px 3px 6px rgba(0, 0, 0, 0.15);
+	transform: translate(0, 0);
+	border-right: 2px solid #b8b84d;
+	border-bottom: 2px solid #b8b84d;
+	border-top: none;
+	border-left: none;
+}
+.fav-button:hover {
+	box-shadow: 1px 1px 0 #b8b84d, 2px 2px 4px rgba(0, 0, 0, 0.1);
+	transform: translate(1px, 1px);
+}
+.fav-button:active {
+	box-shadow: 0.5px 0.5px 0 #b8b84d, 1px 1px 2px rgba(0, 0, 0, 0.08);
+	transform: translate(1.5px, 1.5px);
+}
+.fav-button.active {
+	background: #e4e49f;
+}
+
 @media (max-width: 768px) {
 	.add-food {
 		padding: 1rem;
@@ -401,7 +431,8 @@ export default {
 	}
 
 	.filter-dropdown-trigger,
-	.sort-button {
+	.sort-button,
+	.fav-button {
 		font-size: 0.7rem;
 		padding: 0.4rem 0.8rem;
 	}
